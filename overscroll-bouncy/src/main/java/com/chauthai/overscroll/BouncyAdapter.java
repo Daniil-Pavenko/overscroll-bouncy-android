@@ -1,25 +1,25 @@
 /**
- The MIT License (MIT)
-
- Copyright (c) 2016 Chau Thai
-
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
-
- The above copyright notice and this permission notice shall be included in all
- copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- SOFTWARE.
+ * The MIT License (MIT)
+ * <p>
+ * Copyright (c) 2016 Chau Thai
+ * <p>
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * <p>
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * <p>
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
 
 package com.chauthai.overscroll;
@@ -117,7 +117,7 @@ class BouncyAdapter extends RecyclerView.Adapter implements SpringScroller.Sprin
     private boolean isSpringFirstValue = true;
 
     public BouncyAdapter(Context context, RecyclerView recyclerView,
-                          RecyclerView.Adapter adapter,  BouncyConfig config) {
+                         RecyclerView.Adapter adapter, BouncyConfig config) {
         if (recyclerView == null)
             throw new RuntimeException("null RecyclerView");
 
@@ -142,6 +142,10 @@ class BouncyAdapter extends RecyclerView.Adapter implements SpringScroller.Sprin
         mSpringScroller = new SpringScroller(config.tension, config.friction, this);
 
         initRecyclerView();
+    }
+
+    public RecyclerView.Adapter getOriginAdapter() {
+        return mAdapter;
     }
 
     @Override
@@ -198,7 +202,7 @@ class BouncyAdapter extends RecyclerView.Adapter implements SpringScroller.Sprin
             final int visibleHeader = getHeaderVisibleLength();
             final int visibleFooter = getFooterVisibleLength();
 
-            int diff = directionVertical()? currY : currX;
+            int diff = directionVertical() ? currY : currX;
 
             if (visibleHeader > 0) {
                 diff -= visibleHeader;
@@ -247,7 +251,7 @@ class BouncyAdapter extends RecyclerView.Adapter implements SpringScroller.Sprin
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                final int deltaDist = (directionVertical()? dy : dx) * (mLayoutManager.getReverseLayout()? -1 : 1);
+                final int deltaDist = (directionVertical() ? dy : dx) * (mLayoutManager.getReverseLayout() ? -1 : 1);
 
                 if (footerOccupiesWholeView()) {
                     mPrevFooterVisible = Math.max(0, mPrevFooterVisible + deltaDist);
@@ -388,11 +392,11 @@ class BouncyAdapter extends RecyclerView.Adapter implements SpringScroller.Sprin
      */
     private void computeScrollSpeed(int dx, int dy) {
         long currTime = SystemClock.elapsedRealtime();
-        int deltaDist = (directionVertical()? dy : dx);
+        int deltaDist = (directionVertical() ? dy : dx);
 
         if (mFirstScrollBy) {
             mFirstScrollBy = false;
-            int correctedDeltaDist = deltaDist * (mLayoutManager.getReverseLayout()? -1 : 1);
+            int correctedDeltaDist = deltaDist * (mLayoutManager.getReverseLayout() ? -1 : 1);
 
             if (correctedDeltaDist > 0)
                 deltaDist = getFooterVisibleLength();
@@ -474,15 +478,15 @@ class BouncyAdapter extends RecyclerView.Adapter implements SpringScroller.Sprin
     private PointF getDecelVector(int headerVisible) {
         if (headerVisible > 0) {
             if (directionVertical())
-                return new PointF(0, (!mLayoutManager.getReverseLayout()? -1 : 1));
+                return new PointF(0, (!mLayoutManager.getReverseLayout() ? -1 : 1));
             else
-                return new PointF((!mLayoutManager.getReverseLayout()? -1 : 1), 0);
+                return new PointF((!mLayoutManager.getReverseLayout() ? -1 : 1), 0);
         }
 
         if (directionVertical())
-            return new PointF(0, (!mLayoutManager.getReverseLayout()? 1 : -1));
+            return new PointF(0, (!mLayoutManager.getReverseLayout() ? 1 : -1));
 
-        return new PointF((!mLayoutManager.getReverseLayout()? 1 : -1), 0);
+        return new PointF((!mLayoutManager.getReverseLayout() ? 1 : -1), 0);
     }
 
     /**
@@ -512,14 +516,14 @@ class BouncyAdapter extends RecyclerView.Adapter implements SpringScroller.Sprin
                     final int headerVisible = getHeaderVisibleLength();
                     final int footerVisible = getFooterVisibleLength();
 
-                    int visible = (headerVisible > 0)? headerVisible : footerVisible;
+                    int visible = (headerVisible > 0) ? headerVisible : footerVisible;
 
                     if (visible > 0) {
                         scrollByCount++;
                         mFirstScrollBy = (scrollByCount == 1);
 
                         double ratioVisible = (double) visible / mGapLimitPx;
-                        float distance = directionVertical()? distanceY : distanceX;
+                        float distance = directionVertical() ? distanceY : distanceX;
                         double scrollDist = Math.abs(distance - distance * ratioVisible);
 
                         if (distance < 0) {
@@ -542,7 +546,7 @@ class BouncyAdapter extends RecyclerView.Adapter implements SpringScroller.Sprin
                     final int headerVisible = getHeaderVisibleLength();
                     final int footerVisible = getFooterVisibleLength();
 
-                    float deltaVel = directionVertical()? velocityY : velocityX;
+                    float deltaVel = directionVertical() ? velocityY : velocityX;
                     if (mLayoutManager.getReverseLayout())
                         deltaVel *= -1.0;
 
@@ -606,7 +610,7 @@ class BouncyAdapter extends RecyclerView.Adapter implements SpringScroller.Sprin
      * Return 0 otherwise.
      */
     private int contentSizeLessThanView() {
-        final int recyclerSize = directionVertical()? mRecyclerView.getHeight() : mRecyclerView.getWidth();
+        final int recyclerSize = directionVertical() ? mRecyclerView.getHeight() : mRecyclerView.getWidth();
         return Math.max(recyclerSize - estimateContentSize(), 0);
     }
 
@@ -624,7 +628,7 @@ class BouncyAdapter extends RecyclerView.Adapter implements SpringScroller.Sprin
             if (view != null) {
                 Rect rect = new Rect();
                 mLayoutManager.getDecoratedBoundsWithMargins(view, rect);
-                int itemHeight = Math.abs(directionVertical()? rect.height() : rect.width());
+                int itemHeight = Math.abs(directionVertical() ? rect.height() : rect.width());
 
                 count++;
                 total += itemHeight;
@@ -787,8 +791,8 @@ class BouncyAdapter extends RecyclerView.Adapter implements SpringScroller.Sprin
      */
     private View createGapView() {
         final View view = new View(mContext);
-        final int width = directionVertical()? ViewGroup.LayoutParams.MATCH_PARENT : (int) dpToPx(GAP_SIZE);
-        final int height = directionVertical()? (int) dpToPx(GAP_SIZE) : ViewGroup.LayoutParams.MATCH_PARENT;
+        final int width = directionVertical() ? ViewGroup.LayoutParams.MATCH_PARENT : (int) dpToPx(GAP_SIZE);
+        final int height = directionVertical() ? (int) dpToPx(GAP_SIZE) : ViewGroup.LayoutParams.MATCH_PARENT;
 
         final ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(width, height);
 
@@ -822,13 +826,13 @@ class BouncyAdapter extends RecyclerView.Adapter implements SpringScroller.Sprin
     private double dpToPx(double dp) {
         Resources resources = mContext.getResources();
         DisplayMetrics metrics = resources.getDisplayMetrics();
-        return  dp * ((double) metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+        return dp * ((double) metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
     }
 
     private double pxToDp(double px) {
         Resources resources = mContext.getResources();
         DisplayMetrics metrics = resources.getDisplayMetrics();
-        return  px / ((double) metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+        return px / ((double) metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
     }
 
     private String format(double value) {
