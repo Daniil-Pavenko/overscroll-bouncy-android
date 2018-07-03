@@ -1,16 +1,9 @@
 # OverScrollBouncy
 
-###Forked from (this)[https://github.com/chthai64/overscroll-bouncy-android]
+#### Forked from [this](https://github.com/chthai64/overscroll-bouncy-android)
 
 #####An Android library which supports overscroll bounce effect.
 It uses spring mechanism for animating the scrollback. It currently supports ***RecyclerView*** with LinearLayoutManager.
-
-## Demo
-![Demo](https://github.com/chthai64/overscroll-bouncy-android/raw/master/arts/OverscrollDemo.gif)
-
-<a href="https://play.google.com/store/apps/details?id=com.chauthai.overscrolldemo">
-<img alt="Get it on Google Play" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Get_it_on_Google_play.svg/200px-Get_it_on_Google_play.svg.png" />
-</a>
 
 ## Basic Usage
 
@@ -18,7 +11,7 @@ It uses spring mechanism for animating the scrollback. It currently supports ***
 [![](https://jitpack.io/v/Daniil-Pavenko/overscroll-bouncy-android.svg)](https://jitpack.io/#Daniil-Pavenko/overscroll-bouncy-android)
 ```groovy
 dependencies {
-    implementation 'com.github.Daniil-Pavenko:overscroll-bouncy-android:0.1.2'
+    implementation 'com.github.Daniil-Pavenko:overscroll-bouncy-android:<latest version>'
 }
 ```
 

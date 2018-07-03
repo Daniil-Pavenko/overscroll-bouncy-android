@@ -46,7 +46,7 @@ import java.util.Locale;
  * An adapter class which wraps the original {@link android.support.v7.widget.RecyclerView.Adapter}
  * adapter to create the over-scroll bouncy effect.
  */
-class BouncyAdapter extends RecyclerView.Adapter implements SpringScroller.SpringScrollerListener {
+public class BouncyAdapter extends RecyclerView.Adapter implements SpringScroller.SpringScrollerListener {
     /**
      * The actual gap size (in dp). Not all portion of the gap will be visible.
      * The maximum visible size is defined in {@link BouncyConfig#gapLimit}
